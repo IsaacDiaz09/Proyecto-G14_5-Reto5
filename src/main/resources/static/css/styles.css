@@ -1,0 +1,49 @@
+.centrar {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border: rgb(153, 153, 153) 3px solid;
+}
+
+label,
+input {
+  padding: 10px 20px 10px 10px;
+}
+
+h4,
+h3 {
+  text-align: center;
+}
+
+button {
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+html,
+body {
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+#wrapper {
+  height: 100%;
+  width: 100%;
+  display: table;
+  overflow: hidden;
+}
+#login {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+}
+#github {
+  display: inline-block;
+  background-color: #ccc;
+  margin: 0 auto;
+}

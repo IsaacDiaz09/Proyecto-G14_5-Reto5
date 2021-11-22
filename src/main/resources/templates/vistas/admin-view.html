@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="plantillas/template-imports :: imports">
+</head>
+
+<body>
+	<header th:replace="plantillas/template-header :: navBar">
+	</header>
+
+	<div class="container">
+		<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+			<ul class="nav nav-tabs justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link" th:classappend="${listTab} ? 'active'" id="list-tab" data-toggle="tab"
+						href="#list" role="tab" aria-controls="list" aria-selected="false">Administradores</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" th:classappend="${formTab} ? 'active'" id="form-tab" th:text="${action}"
+						data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true"></a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade" th:classappend="${listTab} ? 'show active'" id="list" role="tabpanel"
+					aria-labelledby="list-tab">
+					<div class="card">
+						<div class="card-header">
+							<h4 class="float-left">Lista de Administradores</h4>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="userList" class="table table-bordered table-hover table-striped">
+									<thead class="thead-light">
+										<tr>
+											<th scope="col">Nombre Admin</th>
+											<th scope="col">Email</th>
+											<th scope="col">Editar</th>
+											<th scope="col">Eliminar</th>
+										</tr>
+									</thead>
+									<tbody id="resultado" th:if="${admins != null and !admins.empty}">
+										<tr th:each="admin: ${admins}">
+											<td th:text="${admin.name}"></td>
+											<td th:text="${admin.email}"></td>
+											<td>
+												<a th:href="@{/admins/update(id=${admin.id})}"
+													class="btn btn-secondary edit" href="#" role="button">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-pencil-fill"
+														viewBox="0 0 16 16">
+														<path
+															d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z">
+														</path>
+													</svg>
+												</a>
+
+											</td>
+											<td>
+												<a th:href="@{/admins/delete(id=${admin.id})}" class="btn btn-secondary"
+													href="#" role="button">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+														fill="currentColor" class="bi bi-trash-fill"
+														viewBox="0 0 16 16">
+														<path
+															d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+													</svg>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+									<tbody th:if="${admins == null or admins.empty}">
+										<tr>
+											<td colspan="4">
+												<div class="alert alert-danger" role="alert">
+													No hay Administradores que mostrar
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" th:classappend="${formTab} ? 'show active'" id="form" role="tabpanel"
+					aria-labelledby="form-tab">
+					<div class="card">
+						<div class="card-header">
+							<h4 th:text="${txtCard}"></h4>
+						</div>
+						<div class="card-body">
+							<form th:object="${admin}" th:action="${formAction} == 'Agregar' ? @{/admins/save} : @{/admins/update/save}" class="form" method="post">
+								<div th:object="${admin}" th:if="${#fields.hasErrors('*')}" class="errorblock">
+									<ul class="alert alert-danger" role="alert">
+										<li th:each="error: ${#fields.errors('*')}" th:text="${error}"
+											style="margin-left: 20px"></li>
+									</ul>
+									<script>
+										$('#form-tab').tab('show');
+									</script>
+								</div>
+								<input type="hidden" name="id" th:field="${admin.id}" />
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+									<div class="col-lg-9">
+										<input th:field="*{name}" placeholder="Escribe tu nombre" type="text"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Email</label>
+									<div class="col-lg-9">
+										<input th:field="*{email}" placeholder="Escribe tu email" type="email"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
+									<div class="col-lg-9">
+										<input th:field="*{password}" placeholder="Escribe la contraseña"
+											type="password" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<div class="col-lg-12 text-center">
+										<button class="btn btn-warning" type="reset">
+											Limpiar
+										</button>
+										<button class="btn btn-success" type="submit" th:text="${submitBtnTxt}">
+										</button>
+										<button th:if="${showCancelBtn}" button type="button" class="btn btn-danger"
+											onclick="location.href='/admins'">Cancelar
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

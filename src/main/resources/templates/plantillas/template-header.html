@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<header th:fragment="navBar">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<a class="navbar-brand" href="#">
+						Reto 5
+					</a>
+					<li class="nav-item" th:classappend="${isCategoryActive} ? 'active'">
+						<a class="nav-link" href="/categories">Categorias</a>
+					</li>
+					<li class="nav-item" th:classappend="${isCabinActive} ? 'active'">
+						<a class="nav-link" href="/cabins">Cabañas</a>
+					</li>
+					<li class="nav-item" th:classappend="${isClientActive} ? 'active'">
+						<a class="nav-link" href="/clients">Clientes</a>
+					</li>
+					<li class="nav-item" th:classappend="${isMsgActive} ? 'active'">
+						<a class="nav-link" href="/messages">Mensajes</a>
+					</li>
+					<li class="nav-item" th:classappend="${isReservationActive} ? 'active'">
+						<a class="nav-link" href="/reservations">Reservaciones</a>
+					</li>
+					<li class="nav-item" th:classappend="${isRatingActive} ? 'active'">
+						<a class="nav-link" href="/ratingReservations">Calificaciones</a>
+					</li>
+					<li class="nav-item" th:classappend="${isAdminActive} ? 'active'">
+						<a class="nav-link" href="/admins">Administradores</a>
+					</li>
+				</ul>
+			</div>
+			<a class="btn btn-outline-danger my-2 my-sm-0" href="/" role="button">Cerrar Sesión</a>
+		</nav>
+	</header>
+
+</body>
+
+</html>
