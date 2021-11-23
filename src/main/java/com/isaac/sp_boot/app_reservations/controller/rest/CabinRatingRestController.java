@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.rest_controller;
+package com.isaac.sp_boot.app_reservations.controller.rest;
 
 import java.util.List;
 
@@ -16,38 +16,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isaac.sp_boot.app_reservations.model.Cabin;
-import com.isaac.sp_boot.app_reservations.service.CabinService;
+import com.isaac.sp_boot.app_reservations.model.CabinRating;
+import com.isaac.sp_boot.app_reservations.service.CabinRatingService;
 
 @RestController
-@RequestMapping("/api/Cabin")
+@RequestMapping("/api/Score")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.DELETE })
-public class CabinRestController {
+public class CabinRatingRestController {
+
 	@Autowired
-	CabinService cabinService;
+	CabinRatingService cabinRatingService;
 
 	@GetMapping("/all")
-	public List<Cabin> recuperarCabanas() {
-		return cabinService.traerTodo();
+	public List<CabinRating> traerCalificaciones() {
+		return cabinRatingService.traerTodo();
 	}
 
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void guardarCabana(@RequestBody Cabin cabin) {
-		cabinService.guardarCabana(cabin);
+	public void guardarCalificacion(@RequestBody CabinRating cabinRating) {
+		cabinRatingService.guardarCalificacion(cabinRating);
+
 	}
 
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void actualizarCabana(@RequestBody Cabin cabin) {
-		cabinService.actualizarCabana(cabin);
+	public void actualizarCalificacion(@RequestBody CabinRating cabinRating) {
+		cabinRatingService.guardarCalificacion(cabinRating);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void eliminarCabana(@PathVariable("id") int id) {
-		cabinService.eliminarCabana(id);
+	public void eliminarCalificacion(@PathVariable("id") int id) {
+		cabinRatingService.eliminarCalificacion(id);
 	}
 
 }

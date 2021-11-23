@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.rest_controller;
+package com.isaac.sp_boot.app_reservations.controller.rest;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,38 +15,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isaac.sp_boot.app_reservations.model.Category;
-import com.isaac.sp_boot.app_reservations.service.CategoryService;
+import com.isaac.sp_boot.app_reservations.model.Admin;
+import com.isaac.sp_boot.app_reservations.service.AdminService;
 
 @RestController
-@RequestMapping("/api/Category")
+@RequestMapping("/api/Admin")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.DELETE })
-public class CategoryRestController {
+public class AdminRestController {
 
 	@Autowired
-	CategoryService categoryService;
+	AdminService adminService;
 
 	@GetMapping("/all")
-	public List<Category> recuperarCategorias() {
-		return categoryService.traerTodo();
+	public List<Admin> traerAdmins() {
+		return adminService.traerTodo();
 	}
 
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void guardarCategoria(@RequestBody Category category) {
-		categoryService.guardarCategoria(category);
+	public void guardarAdmin(@RequestBody Admin admin) {
+		adminService.guardarAdmin(admin);
 	}
 
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void actualizarCategoria(@RequestBody Category category) {
-		categoryService.actualizarCategoria(category);
+	public void actualizarAdmin(@RequestBody Admin admin) {
+		adminService.actualizarAdmin(admin);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void eliminarCategoria(@PathVariable("id") int id) {
-		categoryService.eliminarCategoria(id);
+	public void eliminarAdmin(Admin admin) {
+		adminService.eliminarAdmin(admin);
 	}
+
 }

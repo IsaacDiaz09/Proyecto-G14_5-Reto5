@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.rest_controller;
+package com.isaac.sp_boot.app_reservations.controller.rest;
 
 import java.util.Collections;
 import java.util.Map;

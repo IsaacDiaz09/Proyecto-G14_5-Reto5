@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.rest_controller;
+package com.isaac.sp_boot.app_reservations.controller.rest;
 
 import java.util.List;
 
@@ -16,40 +16,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isaac.sp_boot.app_reservations.model.CabinRating;
-import com.isaac.sp_boot.app_reservations.service.CabinRatingService;
+import com.isaac.sp_boot.app_reservations.model.Category;
+import com.isaac.sp_boot.app_reservations.service.CategoryService;
 
 @RestController
-@RequestMapping("/api/Score")
+@RequestMapping("/api/Category")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.DELETE })
-public class CabinRatingRestController {
+public class CategoryRestController {
 
 	@Autowired
-	CabinRatingService cabinRatingService;
+	CategoryService categoryService;
 
 	@GetMapping("/all")
-	public List<CabinRating> traerCalificaciones() {
-		return cabinRatingService.traerTodo();
+	public List<Category> recuperarCategorias() {
+		return categoryService.traerTodo();
 	}
 
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void guardarCalificacion(@RequestBody CabinRating cabinRating) {
-		cabinRatingService.guardarCalificacion(cabinRating);
-
+	public void guardarCategoria(@RequestBody Category category) {
+		categoryService.guardarCategoria(category);
 	}
 
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void actualizarCalificacion(@RequestBody CabinRating cabinRating) {
-		cabinRatingService.guardarCalificacion(cabinRating);
+	public void actualizarCategoria(@RequestBody Category category) {
+		categoryService.actualizarCategoria(category);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void eliminarCalificacion(@PathVariable("id") int id) {
-		cabinRatingService.eliminarCalificacion(id);
+	public void eliminarCategoria(@PathVariable("id") int id) {
+		categoryService.eliminarCategoria(id);
 	}
-
 }

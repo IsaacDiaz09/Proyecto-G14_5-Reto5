@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.rest_controller;
+package com.isaac.sp_boot.app_reservations.controller.rest;
 
 import java.util.List;
 
@@ -16,40 +16,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.isaac.sp_boot.app_reservations.model.Client;
-import com.isaac.sp_boot.app_reservations.service.ClientService;
+import com.isaac.sp_boot.app_reservations.model.Cabin;
+import com.isaac.sp_boot.app_reservations.service.CabinService;
 
 @RestController
-@RequestMapping("/api/Client")
+@RequestMapping("/api/Cabin")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,
 		RequestMethod.DELETE })
-
-public class ClientRestController {
-
+public class CabinRestController {
 	@Autowired
-	ClientService clientService;
+	CabinService cabinService;
 
 	@GetMapping("/all")
-	public List<Client> recuperarClientes() {
-		return clientService.TraerTodo();
+	public List<Cabin> recuperarCabanas() {
+		return cabinService.traerTodo();
 	}
 
 	@PostMapping("/save")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void guardarCliente(@RequestBody Client client) {
-		clientService.guardarCliente(client);
+	public void guardarCabana(@RequestBody Cabin cabin) {
+		cabinService.guardarCabana(cabin);
 	}
 
 	@PutMapping("/update")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void actualizaCliente(@RequestBody Client client) {
-		clientService.actualizaCliente(client);
+	public void actualizarCabana(@RequestBody Cabin cabin) {
+		cabinService.actualizarCabana(cabin);
 	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void eliminarCliente(@PathVariable("id") int id) {
-		clientService.eliminarCliente(id);
+	public void eliminarCabana(@PathVariable("id") int id) {
+		cabinService.eliminarCabana(id);
 	}
 
 }

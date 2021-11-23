@@ -1,4 +1,4 @@
-package com.isaac.sp_boot.app_reservations.controller.forms_controller;
+package com.isaac.sp_boot.app_reservations.controller.forms;
 
 import java.util.List;
 
